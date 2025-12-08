@@ -105,10 +105,10 @@ export const getUserById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     let userId= req.params.id
-    const { name, email, phoneNumber, password, country, state } = res.body
+    const {name, email, phoneNumber, password, country, state } = req.body
 
     try {
-        let user = corhortFoure.findById(userId)
+        let user = await corhortFoure.findById(userId)
         if(!user) return res.status(404).json({message:"User Not Found"})
 
         // update only provided fileds
@@ -118,7 +118,7 @@ export const updateUser = async (req, res) => {
         user.password = password || user.password
         user.country = country || user.country
         user.state = state || user.state
-        await user.save()
+        await user.save ()
 
         // succes message
         res.status(200).json({message:"user successfilly updated", user:{
