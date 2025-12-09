@@ -2,6 +2,7 @@ import  dotenv  from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
 import userRouter from './route/user-route.js'
+import producRouter from './route/Product-Route.js'
 
 
 dotenv.config()
@@ -20,7 +21,10 @@ mongoose.connect(process.env.MONGODB_URL)
 
 
 // Route
-app.use('/api/users', userRouter)
+app.use('/api/users', userRouter),
+app.use('/api/products', producRouter)
+
+
 
 console.log('my name is vianney')
 
